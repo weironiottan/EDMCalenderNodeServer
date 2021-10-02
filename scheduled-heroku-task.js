@@ -8,6 +8,7 @@ async function scheduledHerokuTasks() {
         console.log('Starting scheduledTask: fetchDataAndUpdateCollection')
         const _resultFromFetchingData = await fetch.fetchDataAndUpdateCollection()
         console.log('Completed Scheduled Task Successfully')
+        process.exit()
     } catch(error) {
         console.log('Scheduled Task failed: ', error)
     }
