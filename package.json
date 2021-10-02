@@ -19,7 +19,6 @@
     "jade": "~1.11.0",
     "mongoose": "^6.0.7",
     "morgan": "~1.9.1",
-    "node-fetch": "^3.0.0",
     "node-schedule": "^2.0.0"
   },
   "devDependencies": {

@@ -9,7 +9,9 @@ const basePathController = (req, res, next) => {
 
 const allEventsController = (req, res, next) => {
     EdmEvent.find()
-        .then(result => {res.json(result)})
+        .then(result => {
+            !!result.length ? res.json(result) : res.status(404).send("Sorry can't find that!")
+        })
         .catch(error => console.log(error))
 }
 
@@ -20,7 +22,9 @@ const eventQueryController = (req, res, next) => {
     const queryItem = {[queryProperty]: queryValue}
     if(ModelProperties.some(property => property === queryProperty[0])) {
         EdmEvent.find(queryItem)
-            .then(result => {res.json(result)})
+            .then(result => {
+                !!result.length ? res.json(result) : res.status(404).send("Sorry can't find that!")
+            })
             .catch(error => console.log(error))
     } else {
         res.send('<h1>Query not found  </h1>')
@@ -30,7 +34,9 @@ const eventQueryController = (req, res, next) => {
 const clubNameQueryController = (req, res, next) => {
     const id = new RegExp(req.params.id);
     EdmEvent.find({clubname: id})
-        .then(result => {res.json(result)})
+        .then(result => {
+            !!result.length ? res.json(result) : res.status(404).send("Sorry can't find that!")
+        })
         .catch(error => console.log(error))
     
 }
@@ -38,7 +44,9 @@ const clubNameQueryController = (req, res, next) => {
 const artistNameQueryController = (req, res, next) => {
     const id = new RegExp(req.params.id);
     EdmEvent.find({artistname: id})
-        .then(result => {res.json(result)})
+        .then(result => {
+            !!result.length ? res.json(result) : res.status(404).send("Sorry can't find that!")      
+        })
         .catch(error => console.log(error))
     
 }
@@ -46,21 +54,27 @@ const artistNameQueryController = (req, res, next) => {
 const artistImageURLQueryController = (req, res, next) => {
     const id = new RegExp(req.params.id);
     EdmEvent.find({artistimageurl: id})
-        .then(result => {res.json(result)})
+        .then(result => {
+            !!result.length ? res.json(result) : res.status(404).send("Sorry can't find that!")
+        })
         .catch(error => console.log(error))  
 }
 
 const eventDateQueryController = (req, res, next) => {
     const id = new RegExp(req.params.id);
     EdmEvent.find({eventdate: id})
-        .then(result => {res.json(result)})
+        .then(result => {
+            !!result.length ? res.json(result) : res.status(404).send("Sorry can't find that!")
+        })
         .catch(error => console.log(error)) 
 }
 
 const ticketURLQueryController = (req, res, next) => {
     const id = new RegExp(req.params.id);
     EdmEvent.find({ticketurl: id})
-        .then(result => {res.json(result)})
+        .then(result => {
+            !!result.length ? res.json(result) : res.status(404).send("Sorry can't find that!")
+        })
         .catch(error => console.log(error))
     
 }
