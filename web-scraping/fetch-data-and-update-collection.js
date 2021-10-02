@@ -10,9 +10,9 @@ async function fetchDataAndUpdateCollection() {
       const wynnEdmEvents = await fetchWynn.fetchWynnGroupEDMEvents()
       const _collectionDeleted = await EdmEvent.deleteMany()
       const resultFromCollection = await EdmEvent.insertMany([...zoukEdmEvents, ...hakkasanGroupEdmEvents, ...wynnEdmEvents])
-      console.log('fetching data and updating the Collection has been completed successfully')
+      console.log('fetching data and updating the Collection has been completed Successfully')
     } catch(error) {
-      console.log(error, 'uh oh something bad has happend :(')
+      console.log('fetching data and updating the Collection was NOT Successful :( ', error)
     }
   }
 
