@@ -9,8 +9,6 @@ var debug = require('debug')('edmcalendarapp:server');
 var http = require('http');
 var mongoose = require('mongoose');
 require('dotenv').config()
-const schedule = require('node-schedule');
-const runTask = require('../web-scraping/fetch-data-and-update-collection')
 
 //Set up mongoose connection
 const DB_NAME = process.env.DB_NAME
@@ -19,14 +17,11 @@ const DB_SECRET = process.env.DB_SECRET
 var mongoDB = `mongodb+srv://${DB_USER}:${DB_SECRET}@edmcalendardata.8zmby.mongodb.net/${DB_NAME}?retryWrites=true&w=majority`;
 mongoose.connect(mongoDB, { useNewUrlParser: true , useUnifiedTopology: true})
 .then((result) => {
-  console.log('db connection successful!')
+  console.log('MongoDB Connection Successful!')
   server.listen(port)
-  schedule.scheduleJob('* */12 * * *', function() {
-    console.log('Running Job Task')
-    runTask.fetchDataAndUpdateCollection()
-  });
+  console.log('Server is up and running!')
 })
-.catch(err => console.log(err));
+.catch(error => console.log('MongoDB connection was NOT Successful :( ', error));
 
 /**
  * Get port from environment and store in Express.
