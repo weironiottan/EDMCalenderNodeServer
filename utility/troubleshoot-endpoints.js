@@ -1,7 +1,12 @@
+// const fetchZouk = require('./web-scraping/fetch-zouk')
+// const fetchHakassanGroup = require('./web-scraping/fetch-hakassan-group')
+// const fetchWynn = require('./web-scraping/fetch-wynn')
+// const EdmEvent = require('./models/edmevent');
+
+
 // keep this for troubleshooting
 // app.get('/add-edm-bulk-events', (req, res) => {
 //   fetchDataAndUpdateCollection()
-
 //   async function fetchDataAndUpdateCollection() {
 //     try {
 //       const zoukEdmEvents = await fetchZouk.fetchZoukEDMEvents()

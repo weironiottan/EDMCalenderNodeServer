@@ -7,7 +7,7 @@ var EdmEventSchema = new Schema({
   clubname: { type: String, lowercase: true, trim: true, required: true },
   artistname: { type: String, lowercase: true, trim: true, required: true },
   artistimageurl: { type: String, lowercase: false, trim: true },
-  eventdate: { type: String, lowercase: true, trim: true, required: true },
+  eventdate: { type: Date, lowercase: true, trim: true, required: true },
   ticketurl: { type: String, lowercase: false, trim: true },
 }, {timestamps:true,});  
 
