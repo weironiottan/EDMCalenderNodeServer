@@ -3,16 +3,13 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var cors = require('cors')
+var app = express();
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+const findEdmRouter = require('./routes/find-edm')
 
-const EdmEvent = require('./models/edmevent');
-const fetchZouk = require('./web-scraping/fetch-zouk')
-const fetchHakassanGroup = require('./web-scraping/fetch-hakassan-group')
-const fetchWynn = require('./web-scraping/fetch-wynn')
-
-var app = express();
+app.use(cors())
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -24,43 +21,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Routes
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
-
-app.get('/add-edm-bulk-events', (req, res) => {
-  fetchDataAndUpdateCollection()
-
-  async function fetchDataAndUpdateCollection() {
-    try {
-      const zoukEdmEvents = await fetchZouk.fetchZoukEDMEvents()
-      const hakkasanGroupEdmEvents = await fetchHakassanGroup.getHakassanGroupEDMEvents()
-      const wynnEdmEvents = await fetchWynn.fetchWynnGroupEDMEvents()
-      const _collectionDeleted = await EdmEvent.deleteMany()
-      const resultFromCollection = await EdmEvent.insertMany([...zoukEdmEvents, ...hakkasanGroupEdmEvents, ...wynnEdmEvents])
-      res.send(resultFromCollection)
-    } catch(error) {
-      console.log(error)
-    }
-  }
-});
-
-app.get('/delete-all-edm-events', (req, res) => {
-  EdmEvent.deleteMany()
-  .then(result => {res.send(result)})
-  .catch(error => console.log(error))
-})
-
-app.get('/all-edm-events', (req, res) => {
-  EdmEvent.find()
-  .then(result => {res.send(result)})
-  .catch(error => console.log(error))
-})
-
-app.get('/one-edm-event', (req, res) => {
-  EdmEvent.findById('61514cc81f188988c357c167')
-  .then(result => {res.send(result)})
-  .catch(error => console.log(error))
-})
+app.use('/find-edm', findEdmRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -9,11 +9,11 @@ async function fetchWynnGroupEDMEvents() {
 
   $('.eventitem').each((i, eventItem) =>{
     const edmEvent = new EdmEvent({
-    clubName : $(eventItem).children(".uv-events-venue").text(),
-    artistName: $(eventItem).children('.uv-events-venue').text(),
-    artistImageURL: $(eventItem).find(".uv-boxitem.noloader").children().first().attr('data-bg'),
-    eventDate: $(eventItem).find(".info").children().first().text() + ' 2021' + ' UTC-7:00',
-    ticketURL: $(eventItem).find(".uv-boxitem.noloader").attr('href')
+    clubname : $(eventItem).children(".uv-events-venue").text(),
+    artistname: $(eventItem).children('.uv-events-venue').text(),
+    artistimageurl: $(eventItem).find(".uv-boxitem.noloader").children().first().attr('data-bg'),
+    eventdate: $(eventItem).find(".info").children().first().text() + ' 2021' + ' UTC-7:00',
+    ticketurl: $(eventItem).find(".uv-boxitem.noloader").attr('href')
   })
     edmEvents[i] = edmEvent
   });

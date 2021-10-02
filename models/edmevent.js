@@ -4,12 +4,12 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var EdmEventSchema = new Schema({
-  clubName: { type: String, lowercase: true, trim: true, required: true },
-  artistName: { type: String, lowercase: true, trim: true, required: true },
-  artistImageURL: { type: String, lowercase: false, trim: true },
-  eventDate: { type: String, lowercase: true, trim: true, required: true },
-  ticketURL: { type: String, lowercase: false, trim: true },
-}, {timestamps:true});  
+  clubname: { type: String, lowercase: true, trim: true, required: true },
+  artistname: { type: String, lowercase: true, trim: true, required: true },
+  artistimageurl: { type: String, lowercase: false, trim: true },
+  eventdate: { type: Date, lowercase: true, trim: true, required: true },
+  ticketurl: { type: String, lowercase: false, trim: true },
+}, {timestamps:true,});  
 
 // Compile model from schema
 // Collection in MongoDB will be EventDataModel
