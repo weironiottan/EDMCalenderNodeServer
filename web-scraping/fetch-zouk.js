@@ -8,11 +8,11 @@ async function fetchZoukEDMEvents() {
   const edmEvents = []
   $('.eventitem').each((i, eventItem) =>{
     const edmEvent = new EdmEvent({
-    clubName : $(eventItem).children(".venueurl").text(),
-    artistName: $(eventItem).find(".uv-event-name").text(),
-    artistImageURL: $(eventItem).find(".uv-boxitem.noloader").children().first().attr('data-bg'),
-    eventDate: $(eventItem).find(".info").children().first().text() + ' 2021' + ' UTC-7:00',
-    ticketURL: $(eventItem).find(".uv-boxitem.noloader").attr('href')
+    clubname : $(eventItem).children(".venueurl").text(),
+    artistname: $(eventItem).find(".uv-event-name").text(),
+    artistimageurl: $(eventItem).find(".uv-boxitem.noloader").children().first().attr('data-bg'),
+    eventdate: $(eventItem).find(".info").children().first().text() + ' 2021' + ' UTC-7:00',
+    ticketurl: $(eventItem).find(".uv-boxitem.noloader").attr('href')
   })
     edmEvents[i] = edmEvent
 

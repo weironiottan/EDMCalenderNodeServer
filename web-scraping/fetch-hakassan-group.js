@@ -14,11 +14,11 @@ async function setEDMEventModel(data) {
     const edmEvents = []
     data.map((eventItem, index) => {
         const edmEvent = new EdmEvent({
-            clubName : eventItem.venue_title,
-            artistName: eventItem.title,
-            artistImageURL: `https://assets.venuedriver.com/flyer/squared/2400/event/${eventItem.id}.jpg`,
-            eventDate: eventItem.date + ' UTC-7:00',
-            ticketURL: 'https://hakkasangroup.com/store/las-vegas/event/' + eventItem.id
+            clubname : eventItem.venue_title,
+            artistname: eventItem.title,
+            artistimageurl: `https://assets.venuedriver.com/flyer/squared/2400/event/${eventItem.id}.jpg`,
+            eventdate: eventItem.date + ' UTC-7:00',
+            ticketurl: 'https://hakkasangroup.com/store/las-vegas/event/' + eventItem.id
           })
           edmEvents[index] = edmEvent
     })

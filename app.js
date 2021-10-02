@@ -3,9 +3,11 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var cors = require('cors')
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+const findEdmRouter = require('./routes/find-edm')
 
 const EdmEvent = require('./models/edmevent');
 const fetchZouk = require('./web-scraping/fetch-zouk')
@@ -13,6 +15,8 @@ const fetchHakassanGroup = require('./web-scraping/fetch-hakassan-group')
 const fetchWynn = require('./web-scraping/fetch-wynn')
 
 var app = express();
+
+app.use(cors())
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -26,6 +30,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/find-edm', findEdmRouter);
 
 app.get('/add-edm-bulk-events', (req, res) => {
   fetchDataAndUpdateCollection()
@@ -42,6 +47,12 @@ app.get('/add-edm-bulk-events', (req, res) => {
       console.log(error)
     }
   }
+});
+
+app.get('/find-all-edm-events', (req, res) => {
+  EdmEvent.find()
+  .then(result => {res.send(result)})
+  .catch(error => console.log(error))
 });
 
 app.get('/delete-all-edm-events', (req, res) => {
