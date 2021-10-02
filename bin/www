@@ -21,7 +21,7 @@ mongoose.connect(mongoDB, { useNewUrlParser: true , useUnifiedTopology: true})
 .then((result) => {
   console.log('db connection successful!')
   server.listen(port)
-  schedule.scheduleJob('*/5 * * * *', function() {
+  schedule.scheduleJob('* */12 * * *', function() {
     console.log('Running Job Task')
     runTask.fetchDataAndUpdateCollection()
   });
