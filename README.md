@@ -16,7 +16,7 @@
 
   <p align="center">
     This Node API server scrapes clubs in vegas that host edm events. Want to find what date a particular DJ is play at which Clubs?
-    You can search by Club Name, Artist Name, Date or just get all the events for all clubs that play EDM
+    You can search by Club Name, Artist Name, Date or just get all the events for all clubs that play EDM Music
     <br />
     <a href="https://github.com/weironiottan/FindEDMEventsAPIServer"><strong>Explore the docs »</strong></a>
     <br />
