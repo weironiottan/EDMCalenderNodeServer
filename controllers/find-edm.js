@@ -8,7 +8,7 @@ const basePathController = (req, res, next) => {
 }
 
 const allEventsController = (req, res, next) => {
-    EdmEvent.find()
+    EdmEvent.find().sort({eventdate: 'asc'})
         .then(result => {
             !!result.length ? res.json(result) : res.status(404).send("Sorry can't find that!")
         })
