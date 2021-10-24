@@ -7,7 +7,7 @@ const fetchYear = require('../utilities/get-year-of-event')
 async function fetchWynnGroupEDMEvents() {
   const { data } = await axios.get('https://www.wynnsocial.com/events/')
   const $ = cheerio.load(data);
-  const edmEvents = []
+  let edmEvents = []
 
   $('.eventitem').each((i, eventItem) =>{
     const year = fetchYear.getYearOfEvent($(eventItem))
@@ -20,7 +20,7 @@ async function fetchWynnGroupEDMEvents() {
   })
     edmEvents[i] = edmEvent
   });
+  edmEvents = edmEvents.filter(edmEvent => !edmEvent.clubname.includes('wynn field club'))
   return edmEvents
 }
-
 module.exports = { fetchWynnGroupEDMEvents };
