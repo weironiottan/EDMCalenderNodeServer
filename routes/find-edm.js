@@ -28,4 +28,3 @@ router.get('/eventdate/:id', FindEDMController.eventDateQueryController)
 router.get('/ticketurl/:id', FindEDMController.ticketURLQueryController)
 
 module.exports = router
-  

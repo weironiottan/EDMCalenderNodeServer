@@ -87,5 +87,5 @@ module.exports = {
     artistNameQueryController,
     artistImageURLQueryController,
     eventDateQueryController,
-    ticketURLQueryController
+    ticketURLQueryController,
 }

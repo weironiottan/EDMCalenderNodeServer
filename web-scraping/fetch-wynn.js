@@ -18,7 +18,7 @@ async function fetchWynnGroupEDMEvents() {
     eventdate: $(eventItem).find(".info").children().first().text() + ` ${year}` + ' UTC-7:00',
     ticketurl: $(eventItem).find(".uv-boxitem.noloader").attr('href')
   })
-    edmEvents[i] = !edmEvent.clubname.includes('wynn field club') && edmEvent
+    edmEvents[i] = edmEvent
   });
   return edmEvents
 }

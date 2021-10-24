@@ -31,7 +31,4 @@ async function getHakassanGroupEDMEvents() {
     return hakkasanGroupEdmEvents
 }
 
-
-
-
 module.exports = { getHakassanGroupEDMEvents }
