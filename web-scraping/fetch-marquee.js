@@ -8,7 +8,7 @@ async function fetchMarqueeEDMEvents() {
   const edmEvents = []
 
   $('.uvc-eventlist').find("a").each((i, eventItem) =>{
-    const year = $('.uvc-eventlist').find("a").first().find('.uvc-elddate').text().trim().slice(-4)
+    const year = $(eventItem).find('.uvc-elddate').text().trim().slice(-4)
     const edmEvent = new EdmEvent({
     clubname : "marquee",
     artistname: $(eventItem).find('.uvc-elevname').text(),
@@ -20,5 +20,4 @@ async function fetchMarqueeEDMEvents() {
   });
   return edmEvents
 }
-
 module.exports = { fetchMarqueeEDMEvents };
