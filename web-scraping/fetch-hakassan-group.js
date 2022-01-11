@@ -1,5 +1,6 @@
 const axios = require("axios")
 const EdmEvent = require('../models/edmevent');
+const SendEmail = require("../utilities/send-email-alert")
 
 async function fetchHakkasanGroupEvents() {
     let { data } = await axios.get('https://data.portaldriver.engineering/events.json')
@@ -11,18 +12,25 @@ async function fetchHakkasanGroupEvents() {
 }
 
 async function setEDMEventModel(data) {
-    const edmEvents = []
-    data.map((eventItem, index) => {
-        const edmEvent = new EdmEvent({
-            clubname : eventItem.venue_title,
-            artistname: eventItem.title,
-            artistimageurl: `https://assets.venuedriver.com/flyer/squared/2400/event/${eventItem.id}.jpg`,
-            eventdate: eventItem.date + ' UTC-7:00',
-            ticketurl: 'https://hakkasangroup.com/store/las-vegas/event/' + eventItem.id
-          })
-          edmEvents[index] = edmEvent
-    })
-    return edmEvents
+    let hasWebScrappingErrorOccured = false
+    try {
+        const edmEvents = []
+        data.map((eventItem, index) => {
+            const edmEvent = new EdmEvent({
+                clubname : eventItem.venue_title,
+                artistname: eventItem.title,
+                artistimageurl: `https://assets.venuedriver.com/flyer/squared/2400/event/${eventItem.id}.jpg`,
+                eventdate: eventItem.date + ' UTC-7:00',
+                ticketurl: 'https://hakkasangroup.com/store/las-vegas/event/' + eventItem.id
+              })
+              edmEvents[index] = edmEvent
+        })       
+    } catch (error) {
+        SendEmail.sendErrorEmailAlert(error)
+        return hasWebScrappingErrorOccured = true;
+    }
+    console.log("Hakkassan Group fetching all Done!")
+    return hasWebScrappingErrorOccured ? [] : edmEvents
 }
 
 async function getHakassanGroupEDMEvents() {
