@@ -18,10 +18,10 @@ async function fetchDataAndUpdateCollection() {
         ...wynnEdmEvents, 
         ...marqueeEdmEvents
       ])
-      console.log('fetching data and updating the Collection has been completed Successfully')
+      console.log('Fetching data and updating the EDM Events  Collection has been completed Successfully')
     } catch(error) {
       SendEmail.sendErrorEmailAlert(error)
-      console.log('fetching data and updating the Collection was NOT Successful :( ', error)
+      console.log('Fetching data and updating the EDM Events Collection was NOT Successful :( ', error)
     }
   }
 
