@@ -16,11 +16,10 @@ sgMail
   .send(msg)
   .then(() => {
     console.log('EDM Event API Server Error Email sent')
-    console.log(process.env.SENDGRID_API_KEY)
   })
   .catch((error) => {
     console.error(error)
   })
   }
-  sendErrorEmailAlert()
+
 module.exports = { sendErrorEmailAlert }

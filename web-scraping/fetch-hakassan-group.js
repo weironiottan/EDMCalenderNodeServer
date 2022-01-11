@@ -13,8 +13,8 @@ async function fetchHakkasanGroupEvents() {
 
 async function setEDMEventModel(data) {
     let hasWebScrappingErrorOccured = false
+    const edmEvents = []
     try {
-        const edmEvents = []
         data.map((eventItem, index) => {
             const edmEvent = new EdmEvent({
                 clubname : eventItem.venue_title,
