@@ -1,4 +1,6 @@
 var createError = require('http-errors');
+var compression = require('compression');
+const helmet = require("helmet");
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
@@ -10,6 +12,8 @@ var indexRouter = require('./routes/index');
 const findEdmRouter = require('./routes/find-edm')
 
 app.use(cors())
+app.use(compression())
+app.use(helmet());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
