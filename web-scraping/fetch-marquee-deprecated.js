@@ -3,6 +3,11 @@ const cheerio = require("cheerio")
 const EdmEvent = require('../models/edmevent');
 const SendEmail = require("../utilities/send-email-alert")
 
+/* 
+This was broken because their website has changed quite a bit, funny thing is that marquee events are getting pulled from
+the json payload from hakassan group, making this script deprecated for now
+*/
+
 async function fetchMarqueeEDMEvents() {
   const { data } = await axios.get("http://marquee.taogroup.com/")
   const $ = cheerio.load(data);
@@ -28,8 +33,5 @@ async function fetchMarqueeEDMEvents() {
   console.log("Marquee fetching all Done!");
   return hasWebScrappingErrorOccured ? [] : edmEvents
 }
-
-
-
 
 module.exports = { fetchMarqueeEDMEvents };

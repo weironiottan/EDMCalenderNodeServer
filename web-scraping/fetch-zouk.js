@@ -35,7 +35,7 @@ async function fetchZoukEDMEvents() {
         clubname : $(eventItem).children(".venueurl").text(),
         artistname: $(eventItem).find(".uv-event-name").text(),
         artistimageurl: $(eventItem).find(".uv-boxitem.noloader").children().first().attr('data-bg'),
-        eventdate: $(eventItem).find(".info").children().first().text() + ` ${year}` + ' UTC-7:00',
+        eventdate: removePipeFromDate( $(eventItem).find(".info").children().first().text() ) + ` ${year}` + ' UTC-7:00',
         ticketurl: $(eventItem).find(".uv-boxitem.noloader").attr('href')
         })
         edmEvents.push(edmEvent)
@@ -52,6 +52,13 @@ async function fetchZoukEDMEvents() {
 
   console.log("Zouk fetching all Done!")
   return hasWebScrappingErrorOccured ? [] : edmEvents
+}
+
+function removePipeFromDate(eventDate)  {
+  if( eventDate.includes("|") ) {
+    eventDate = eventDate.slice(0, eventDate.indexOf("|") - 1).trim()
+  } 
+  return eventDate
 }
 
 module.exports = { fetchZoukEDMEvents };
