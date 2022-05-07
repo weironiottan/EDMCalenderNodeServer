@@ -32,7 +32,7 @@ async function fetchZoukEDMEvents() {
       $('.eventitem').each((i, eventItem) =>{
         const year = fetchYear.getYearOfEvent($(eventItem))
         const edmEvent = new EdmEvent({
-        clubname : $(eventItem).children(".venueurl").text(),
+        clubname : verifyEventIsSpecialEvent($(eventItem).children(".venueurl").text()),
         artistname: $(eventItem).find(".uv-event-name").text(),
         artistimageurl: $(eventItem).find(".uv-boxitem.noloader").children().first().attr('data-bg'),
         eventdate: removePipeFromDate( $(eventItem).find(".info").children().first().text() ) + ` ${year}` + ' UTC-7:00',
@@ -61,4 +61,11 @@ function removePipeFromDate(eventDate)  {
   return eventDate
 }
 
-module.exports = { fetchZoukEDMEvents };
+function verifyEventIsSpecialEvent(clubname) {
+  if(clubname.trim() == "") {
+    clubname = "special event"
+  }
+  return clubname
+}
+
+module.exports = { fetchZoukEDMEvents }
