@@ -56,6 +56,6 @@ jobs:
             echo "starting server instance..."
             docker run -d \
               --restart always \
-              -p 0.0.0.0:80:80 \
+              -p 0.0.0.0:49160:8080 \
               --name api \
               registry.digitalocean.com/christian-playground-containers/api:latest
