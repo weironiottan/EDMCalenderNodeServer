@@ -54,7 +54,7 @@ jobs:
         with:
           host: ${{ secrets.DO_API_HOST }}
           username: ${{ secrets.USER_NAME }}
-          key: ${{ secrets.DO_FIND_EDM_EVENTS_API_SERVER_API_KEY }}
+          password: ${{ secrets.DO_FIND_EDM_EVENTS_API_SERVER_API_KEY }}
           envs: IMAGE_NAME,REGISTRY,{{ secrets.DIGITALOCEAN_ACCESS_TOKEN }},GITHUB_SHA
           script: |
             # Login to registry
