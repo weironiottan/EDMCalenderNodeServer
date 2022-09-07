@@ -50,10 +50,17 @@ jobs:
     
     steps:
       - name: Deploy to Digital Ocean droplet via SSH action
-        uses: appleboy/ssh-action@v0.1.3
+        uses: fifsky/ssh-action@master
         with:
+#           host: ${{ secrets.DO_API_HOST }}
+#           username: ${{ secrets.USER_NAME }}
+#           key: ${{ secrets.DO_FIND_EDM_EVENTS_API_SERVER_API_KEY }}
+#           envs: IMAGE_NAME,REGISTRY,{{ secrets.DIGITALOCEAN_ACCESS_TOKEN }},GITHUB_SHA
+          command: |
+            cd /tmp
+            ls -a
           host: ${{ secrets.DO_API_HOST }}
-          username: ${{ secrets.USER_NAME }}
+          user: root
           key: ${{ secrets.DO_FIND_EDM_EVENTS_API_SERVER_API_KEY }}
           envs: IMAGE_NAME,REGISTRY,{{ secrets.DIGITALOCEAN_ACCESS_TOKEN }},GITHUB_SHA
           script: |
