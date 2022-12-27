@@ -2,7 +2,6 @@ const axios = require("axios")
 const cheerio = require("cheerio")
 const EdmEvent = require('../models/edmevent');
 const fetchYear = require('../utilities/get-year-of-event');
-const SendEmail = require("../utilities/send-email-alert")
 
 /* 
 Update: 02/06/2022
@@ -19,13 +18,15 @@ might come in useful if they decide to remove the lazy loading feature then this
 async function fetchZoukEDMEvents() {
 
   // getMonth() is Index Zero based so need to add 1
+  let currentYear = new Date().getFullYear()
   let currentMonth = new Date().getMonth() + 1
+  let currentDay = new Date().getDate()
   let hasEventItems = false
   const edmEvents = []
   let hasWebScrappingErrorOccured = false
 
   do {
-    const { data } = await axios.get(`https://zoukgrouplv.com/wp-admin/admin-ajax.php?action=uvwp_loadmoreevents&venuegroup=all&caldate=2022-${currentMonth}-01`)
+    const { data } = await axios.get(`https://zoukgrouplv.com/wp-admin/admin-ajax.php?action=uvwp_loadmoreevents&venuegroup=all&caldate=${currentYear}-${currentMonth}-${currentDay}`)
     const $ = cheerio.load(data);
     hasEventItems = $('body').find('.eventitem').text() != '' ? true : false
     if(hasEventItems) {
@@ -45,7 +46,6 @@ async function fetchZoukEDMEvents() {
   } while (hasEventItems);
 
   if(edmEvents.length === 0) {
-    SendEmail.sendErrorEmailAlert("Zouk event Data was not successful")
     console.log("error occured")
     hasWebScrappingErrorOccured = true;
   }

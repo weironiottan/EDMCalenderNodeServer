@@ -1,6 +1,5 @@
 const axios = require("axios")
 const EdmEvent = require('../models/edmevent');
-const SendEmail = require("../utilities/send-email-alert")
 
 async function fetchHakkasanGroupEvents() {
     let { data } = await axios.get('https://data.portaldriver.engineering/events.json')
@@ -26,7 +25,6 @@ async function setEDMEventModel(data) {
               edmEvents[index] = edmEvent
         })       
     } catch (error) {
-        SendEmail.sendErrorEmailAlert(error)
         return hasWebScrappingErrorOccured = true;
     }
     console.log("Hakkassan Group fetching all Done!")

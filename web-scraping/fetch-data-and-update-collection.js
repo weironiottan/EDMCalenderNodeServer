@@ -2,7 +2,6 @@ const EdmEvent = require('../models/edmevent');
 const fetchZouk = require('./fetch-zouk')
 const fetchHakassanGroup = require('./fetch-hakassan-group')
 const fetchWynn = require('./fetch-wynn')
-const SendEmail = require("../utilities/send-email-alert")
 
 async function fetchDataAndUpdateCollection() {
     try {
@@ -17,7 +16,6 @@ async function fetchDataAndUpdateCollection() {
       ])
       console.log('Fetching data and updating the EDM Events  Collection has been completed Successfully')
     } catch(error) {
-      SendEmail.sendErrorEmailAlert(error)
       console.log('Fetching data and updating the EDM Events Collection was NOT Successful :( ', error)
     }
   }

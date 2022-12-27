@@ -2,7 +2,8 @@ const axios = require("axios")
 const cheerio = require("cheerio")
 const EdmEvent = require('../models/edmevent');
 const fetchYear = require('../utilities/get-year-of-event')
-const SendEmail = require("../utilities/send-email-alert")
+
+// To run me do node fetchWynnGroupEDMEvents, just make sure you first make it callable ie fetchWynnGroupEDMEvents() on line 41
 
 async function fetchWynnGroupEDMEvents() {
   const { data } = await axios.get('https://www.wynnsocial.com/events/')
@@ -23,11 +24,14 @@ async function fetchWynnGroupEDMEvents() {
       edmEvents[i] = edmEvent
       
     } catch (error) {
-      SendEmail.sendErrorEmailAlert(error)
       return hasWebScrappingErrorOccured = true;
     }
   });
+
+  // To filter out events that do not have a DJ but are events/festivals etc
   edmEvents = edmEvents.filter(edmEvent => !edmEvent.clubname.includes('wynn field club'))
+  edmEvents = edmEvents.filter(edmEvent => !edmEvent.clubname.includes('festival'))
+  edmEvents = edmEvents.filter(edmEvent => !edmEvent.artistname.includes('art of the wild'))
   console.log("Wynn fetching all Done!");
   return hasWebScrappingErrorOccured ? [] : edmEvents
 }
